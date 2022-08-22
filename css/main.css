@@ -5,3 +5,9 @@ body {
 h1 {
 	text-align: center;
 }
+
+.menu {
+	text-align: center;
+	background-color: #001f4c;
+	color: #ffe0b3
+}
