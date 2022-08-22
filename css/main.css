@@ -1,5 +1,5 @@
 body {
-	background-color: #ffe0b3
+	background-color: #ffe0b3;
 }
 
 h1 {
@@ -8,6 +8,20 @@ h1 {
 
 .menu {
 	text-align: center;
+	text-shadow: 5px 2px black;
 	background-color: #001f4c;
-	color: #ffe0b3
+	color: #ffe0b3;
+}
+
+table.menu, th.menu, tr.menu, td.menu {
+	border: 1px solid;
+}
+
+table.menu {
+	border-collapse: collapse;
+	width: 100%
+}
+
+a.menu {
+	text-decoration: none;
 }
