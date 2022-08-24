@@ -25,3 +25,8 @@ table.menu {
 a.menu {
 	text-decoration: none;
 }
+
+footer {
+	text-align:	right;
+	background-color: #bfa073;
+}

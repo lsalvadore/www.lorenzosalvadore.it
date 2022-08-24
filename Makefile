@@ -25,13 +25,15 @@ ${DESTDIR_LANGUAGES:S;$;/index.html;}:	${@:S;/index.html;;} \
 					common/languages_menu.html \
 					${@:S;^${DESTDIR}/;;:S;/index.html;;}/titles/index.html \
 					${@:S;^${DESTDIR}/;;:S;/index.html;;}/menu.html \
-					${@:S;^${DESTDIR}/;;:S;/index.html;;}/index.html
+					${@:S;^${DESTDIR}/;;:S;/index.html;;}/index.html \
+					${@:S;^${DESTDIR}/;;:S;/index.html;;}/footer.html
 	cat	common/head.html \
 		${@:S;^${DESTDIR}/;;:S;/index.html;;}/heads/index.html \
 		common/languages_menu.html \
 		${@:S;^${DESTDIR}/;;:S;/index.html;;}/titles/index.html \
 		${@:S;^${DESTDIR}/;;:S;/index.html;;}/menu.html \
 		${@:S;^${DESTDIR}/;;:S;/index.html;;}/index.html \
+		${@:S;^${DESTDIR}/;;:S;/index.html;;}/footer.html \
 		| \
 	sed	"s/%%PAGE%%/${@:T}/g" \
 		> $@
