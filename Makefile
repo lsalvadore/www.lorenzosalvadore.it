@@ -2,9 +2,10 @@ DESTDIR?=	/var/www
 LANGUAGES?=	it en fr
 
 CSSDIR=			${DESTDIR}/css
-FILES=			index.html
 DESTDIR_LANGUAGES=	${LANGUAGES:S;^;${DESTDIR}/;}
-FILES_LANGUAGES=	${DESTDIR_LANGUAGES:S;$;/${FILES};}
+
+FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/index.html;}
+FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/development.html;}
 
 all:	${DESTDIR}/index.html \
 	${DESTDIR}/css/main.css \
@@ -19,23 +20,25 @@ ${DESTDIR} ${CSSDIR} ${DESTDIR_LANGUAGES}:
 ${DESTDIR}/css/main.css: ${CSSDIR} css/main.css
 	cp css/main.css $@
 
-${DESTDIR_LANGUAGES:S;$;/index.html;}:	${@:S;/index.html;;} \
+${DESTDIR_LANGUAGES:S;$;/index.html;} \
+${DESTDIR_LANGUAGES:S;$;/development.html;}:	${@:S;/${@:T};;} \
 					common/head.html \
-					${@:S;^${DESTDIR}/;;:S;/index.html;;}/heads/index.html \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/heads/${@:T} \
 					common/languages_menu.html \
-					${@:S;^${DESTDIR}/;;:S;/index.html;;}/titles/index.html \
-					${@:S;^${DESTDIR}/;;:S;/index.html;;}/menu.html \
-					${@:S;^${DESTDIR}/;;:S;/index.html;;}/index.html \
-					${@:S;^${DESTDIR}/;;:S;/index.html;;}/footer.html
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/titles/${@:T} \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/menu.html \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/${@:T} \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/footer.html
 	cat	common/head.html \
-		${@:S;^${DESTDIR}/;;:S;/index.html;;}/heads/index.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/heads/${@:T} \
 		common/languages_menu.html \
-		${@:S;^${DESTDIR}/;;:S;/index.html;;}/titles/index.html \
-		${@:S;^${DESTDIR}/;;:S;/index.html;;}/menu.html \
-		${@:S;^${DESTDIR}/;;:S;/index.html;;}/index.html \
-		${@:S;^${DESTDIR}/;;:S;/index.html;;}/footer.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/titles/${@:T} \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/menu.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/${@:T} \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/footer.html \
 		| \
 	sed	"s/%%PAGE%%/${@:T}/g" \
 		> $@
+
 clean:
 	rm -Rf ${DESTDIR}/*
