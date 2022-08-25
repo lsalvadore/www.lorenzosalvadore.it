@@ -45,19 +45,19 @@ ${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}:	${@:S;/${@:T};;} \
 					common/head.html \
 					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
 					common/languages_menu.html \
-					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
-					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
-					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
-					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html
 	cat	common/head.html \
-		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
 		common/languages_menu.html \
-		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
-		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
-		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
-		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html \
 		| \
-	sed	"s/%%PAGE%%/${@:T}/g" \
+	sed	"s;%%PAGE%%;${@:C;^${DESTDIR}/../;;:S;/${@:T};;};g" \
 		> $@
 
 clean:
