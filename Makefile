@@ -6,6 +6,7 @@ DESTDIR_LANGUAGES=	${LANGUAGES:S;^;${DESTDIR}/;}
 
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/index.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/development.html;}
+FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}
 
 all:	${DESTDIR}/index.html \
 	${DESTDIR}/css/main.css \
@@ -14,7 +15,7 @@ all:	${DESTDIR}/index.html \
 ${DESTDIR}/index.html:
 	cp index.html ${DESTDIR}/index.html
 
-${DESTDIR} ${CSSDIR} ${DESTDIR_LANGUAGES}:
+${DESTDIR} ${CSSDIR} ${DESTDIR_LANGUAGES} ${DESTDIR_LANGUAGES:S;$;/hacking;}:
 	mkdir -p $@
 
 ${DESTDIR}/css/main.css: ${CSSDIR} css/main.css
@@ -36,6 +37,25 @@ ${DESTDIR_LANGUAGES:S;$;/development.html;}:	${@:S;/${@:T};;} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/menu.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/${@:T} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/footer.html \
+		| \
+	sed	"s/%%PAGE%%/${@:T}/g" \
+		> $@
+
+${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}:	${@:S;/${@:T};;} \
+					common/head.html \
+					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
+					common/languages_menu.html \
+					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
+					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
+					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
+					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html
+	cat	common/head.html \
+		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
+		common/languages_menu.html \
+		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
+		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
+		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
+		${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html \
 		| \
 	sed	"s/%%PAGE%%/${@:T}/g" \
 		> $@
