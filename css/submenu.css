@@ -1,0 +1,19 @@
+.submenu {
+	text-align: center;
+	text-shadow: 2px 2px black;
+	background-color: #405f9c;
+	color: #ffe0b3;
+}
+
+table.submenu, th.submenu, tr.submenu, td.submenu {
+	border: 1px solid;
+}
+
+table.submenu {
+	border-collapse: collapse;
+	width: 100%
+}
+
+a.submenu {
+	text-decoration: none;
+}

@@ -18,8 +18,10 @@ ${DESTDIR}/index.html:
 ${DESTDIR} ${CSSDIR} ${DESTDIR_LANGUAGES} ${DESTDIR_LANGUAGES:S;$;/hacking;}:
 	mkdir -p $@
 
-${DESTDIR}/css/main.css: ${CSSDIR} css/main.css
-	cp css/main.css $@
+${DESTDIR}/css/main.css \
+${DESTDIR}/css/submenu.css:	${CSSDIR} \
+				${@:S;^${DESTDIR}/;;}
+	cp ${@:S;^${DESTDIR}/;;} $@
 
 ${DESTDIR_LANGUAGES:S;$;/index.html;} \
 ${DESTDIR_LANGUAGES:S;$;/development.html;}:	${@:S;/${@:T};;} \
@@ -42,11 +44,13 @@ ${DESTDIR_LANGUAGES:S;$;/development.html;}:	${@:S;/${@:T};;} \
 		> $@
 
 ${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}:	${@:S;/${@:T};;} \
+					${DESTDIR}/css/submenu.css \
 					common/head.html \
 					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
 					common/languages_menu.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/submenu.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html
 	cat	common/head.html \
@@ -54,6 +58,7 @@ ${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}:	${@:S;/${@:T};;} \
 		common/languages_menu.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/submenu.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html \
 		| \
