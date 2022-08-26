@@ -1,0 +1,21 @@
+.data-table {
+	text-align: center;
+	background-color: #405f9c;
+}
+
+table.data-table, tr.data-table {
+	border: 1px solid;
+}
+
+th.data-table {
+	background-color: #90afec;
+}
+
+td.data-table {
+	background-color: #a0bffc;
+}
+
+table.data-table {
+	border-collapse: collapse;
+	width: 100%
+}

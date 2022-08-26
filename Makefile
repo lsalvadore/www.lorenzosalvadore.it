@@ -6,6 +6,7 @@ CTF_CERTIFICATES_DIR=	${DESTDIR}/ctf-certificates
 DESTDIR_LANGUAGES=	${LANGUAGES:S;^;${DESTDIR}/;}
 
 FILES_CSS+=		${CSSDIR:S;$;/main.css;}
+FILES_CSS+=		${CSSDIR:S;$;/data-table.css;}
 FILES_CSS+=		${CSSDIR:S;$;/submenu.css;}
 
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/index.html;}
