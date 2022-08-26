@@ -5,6 +5,9 @@ CSSDIR=			${DESTDIR}/css
 CTF_CERTIFICATES_DIR=	${DESTDIR}/ctf-certificates
 DESTDIR_LANGUAGES=	${LANGUAGES:S;^;${DESTDIR}/;}
 
+FILES_CSS+=		${CSSDIR:S;$;/main.css;}
+FILES_CSS+=		${CSSDIR:S;$;/submenu.css;}
+
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/index.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/development.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}
@@ -15,7 +18,7 @@ FILES_CTF_CERTIFICATES+=	${CTF_CERTIFICATES_DIR:S;$;/NahamConCtf2022.png;}
 FILES_CTF_CERTIFICATES+=	${CTF_CERTIFICATES_DIR:S;$;/CyberApocalypseCTF2022.pdf;}
 
 all:	${DESTDIR}/index.html \
-	${DESTDIR}/css/main.css \
+	${FILES_CSS} \
 	${FILES_LANGUAGES} \
 	${FILES_CTF_CERTIFICATES}
 
@@ -29,9 +32,8 @@ ${DESTDIR_LANGUAGES} \
 ${DESTDIR_LANGUAGES:S;$;/hacking;}:
 	mkdir -p $@
 
-${DESTDIR}/css/main.css \
-${DESTDIR}/css/submenu.css:	${CSSDIR} \
-				${@:S;^${DESTDIR}/;;}
+${FILES_CSS}:	${CSSDIR} \
+		${@:S;^${DESTDIR}/;;}
 	cp ${@:S;^${DESTDIR}/;;} $@
 
 ${FILES_CTF_CERTIFICATES}:	${CTF_CERTIFICATES_DIR} \
@@ -60,7 +62,6 @@ ${DESTDIR_LANGUAGES:S;$;/development.html;}:	${@:S;/${@:T};;} \
 
 ${DESTDIR_LANGUAGES:S;$;/hacking/index.html;} \
 ${DESTDIR_LANGUAGES:S;$;/hacking/ctf-certificates.html;}:	${@:S;/${@:T};;} \
-					${DESTDIR}/css/submenu.css \
 					common/head.html \
 					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
 					common/languages_menu.html \
