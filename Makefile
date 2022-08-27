@@ -80,7 +80,7 @@ ${DESTDIR_LANGUAGES:S;$;/hacking/ctf-certificates.html;}:	${@:S;/${@:T};;} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/${@:T} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html \
 		| \
-	sed	"s;%%PAGE%%;${@:C;^${DESTDIR}/../;;:S;/${@:T};;};g" \
+	sed	"s;%%PAGE%%;${@:C;^${DESTDIR}/../;;};g" \
 		> $@
 
 clean:
