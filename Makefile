@@ -13,6 +13,7 @@ FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/index.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/development.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/hacking/ctf-certificates.html;}
+FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/mathematics.html;}
 
 FILES_CTF_CERTIFICATES+=	${CTF_CERTIFICATES_DIR:S;$;/AdventOfCyber2021.png;}
 FILES_CTF_CERTIFICATES+=	${CTF_CERTIFICATES_DIR:S;$;/NahamConCtf2022.png;}
@@ -42,7 +43,8 @@ ${FILES_CTF_CERTIFICATES}:	${CTF_CERTIFICATES_DIR} \
 	cp ${@:S;^${DESTDIR}/;;} $@
 
 ${DESTDIR_LANGUAGES:S;$;/index.html;} \
-${DESTDIR_LANGUAGES:S;$;/development.html;}:	${@:S;/${@:T};;} \
+${DESTDIR_LANGUAGES:S;$;/development.html;} \
+${DESTDIR_LANGUAGES:S;$;/mathematics.html;}:	${@:S;/${@:T};;} \
 					common/head.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/heads/${@:T} \
 					common/languages_menu.html \
