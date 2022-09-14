@@ -3,6 +3,11 @@ LANGUAGES?=	it en fr
 
 CSSDIR=			${DESTDIR}/css
 CTF_CERTIFICATES_DIR=	${DESTDIR}/ctf-certificates
+
+WRITEUPS_DIR=		${DESTDIR}/writeups
+WRITEUPS_SUBDIRS+=	${WRITEUPS_DIR}/hackthebox \
+			${WRITEUPS_DIR}/hackthebox/machines
+
 DESTDIR_LANGUAGES=	${LANGUAGES:S;^;${DESTDIR}/;}
 
 FILES_CSS+=		${CSSDIR:S;$;/main.css;}
@@ -13,16 +18,22 @@ FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/index.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/development.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/hacking/index.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/hacking/ctf-certificates.html;}
+FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/hacking/writeups.html;}
 FILES_LANGUAGES+=	${DESTDIR_LANGUAGES:S;$;/mathematics.html;}
 
 FILES_CTF_CERTIFICATES+=	${CTF_CERTIFICATES_DIR:S;$;/AdventOfCyber2021.png;}
 FILES_CTF_CERTIFICATES+=	${CTF_CERTIFICATES_DIR:S;$;/NahamConCtf2022.png;}
 FILES_CTF_CERTIFICATES+=	${CTF_CERTIFICATES_DIR:S;$;/CyberApocalypseCTF2022.pdf;}
 
+FILES_WRITEUPS+=	${WRITEUPS_DIR:S;$;/hackthebox/machines/Late.pdf;}
+FILES_WRITEUPS+=	${WRITEUPS_DIR:S;$;/hackthebox/machines/Phoenix.pdf;}
+FILES_WRITEUPS+=	${WRITEUPS_DIR:S;$;/hackthebox/machines/Undetected.pdf;}
+
 all:	${DESTDIR}/index.html \
 	${FILES_CSS} \
 	${FILES_LANGUAGES} \
-	${FILES_CTF_CERTIFICATES}
+	${FILES_CTF_CERTIFICATES} \
+	${FILES_WRITEUPS}
 
 ${DESTDIR}/index.html:
 	cp index.html ${DESTDIR}/index.html
@@ -30,6 +41,8 @@ ${DESTDIR}/index.html:
 ${DESTDIR} \
 ${CSSDIR} \
 ${CTF_CERTIFICATES_DIR} \
+${WRITEUPS_DIR} \
+${WRITEUPS_SUBDIRS} \
 ${DESTDIR_LANGUAGES} \
 ${DESTDIR_LANGUAGES:S;$;/hacking;}:
 	mkdir -p $@
@@ -40,6 +53,11 @@ ${FILES_CSS}:	${CSSDIR} \
 
 ${FILES_CTF_CERTIFICATES}:	${CTF_CERTIFICATES_DIR} \
 				${@:S;^${DESTDIR}/;;}
+	cp ${@:S;^${DESTDIR}/;;} $@
+
+${FILES_WRITEUPS}:	${WRITEUPS_DIR} \
+			${WRITEUPS_SUBDIRS} \
+			${@:S;^${DESTDIR}/;;}
 	cp ${@:S;^${DESTDIR}/;;} $@
 
 ${DESTDIR_LANGUAGES:S;$;/index.html;} \
@@ -64,7 +82,8 @@ ${DESTDIR_LANGUAGES:S;$;/mathematics.html;}:	${@:S;/${@:T};;} \
 		> $@
 
 ${DESTDIR_LANGUAGES:S;$;/hacking/index.html;} \
-${DESTDIR_LANGUAGES:S;$;/hacking/ctf-certificates.html;}:	${@:S;/${@:T};;} \
+${DESTDIR_LANGUAGES:S;$;/hacking/ctf-certificates.html;} \
+${DESTDIR_LANGUAGES:S;$;/hacking/writeups.html;}:	${@:S;/${@:T};;} \
 					common/head.html \
 					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
 					common/languages_menu.html \
