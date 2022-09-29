@@ -65,14 +65,14 @@ ${DESTDIR_LANGUAGES:S;$;/development.html;} \
 ${DESTDIR_LANGUAGES:S;$;/mathematics.html;}:	${@:S;/${@:T};;} \
 					common/head.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/heads/${@:T} \
-					common/languages_menu.html \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/languages_menu.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/titles/${@:T} \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/menu.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/${@:T} \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;}/footer.html
 	cat	common/head.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/heads/${@:T} \
-		common/languages_menu.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/languages_menu.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/titles/${@:T} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/menu.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;}/${@:T} \
@@ -86,7 +86,7 @@ ${DESTDIR_LANGUAGES:S;$;/hacking/ctf-certificates.html;} \
 ${DESTDIR_LANGUAGES:S;$;/hacking/writeups.html;}:	${@:S;/${@:T};;} \
 					common/head.html \
 					${@:C;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
-					common/languages_menu.html \
+					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/languages_menu.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/submenu.html \
@@ -94,7 +94,7 @@ ${DESTDIR_LANGUAGES:S;$;/hacking/writeups.html;}:	${@:S;/${@:T};;} \
 					${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/footer.html
 	cat	common/head.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/heads/hacking/${@:T} \
-		common/languages_menu.html \
+		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/languages_menu.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/titles/hacking/${@:T} \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/menu.html \
 		${@:S;^${DESTDIR}/;;:S;/${@:T};;:S;/hacking;;}/hacking/submenu.html \
